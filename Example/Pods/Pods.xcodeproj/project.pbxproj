@@ -11,6 +11,9 @@
 		16FD78401EBA25A496EA825640617207 /* SwiftToast.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6703A56C2572F06FCFB01A3E8FC2964E /* SwiftToast.bundle */; };
 		186121B94BD37C4BF3E86B059FC4FD2A /* Pods-SwiftToast_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18138ED54DE0FAC575636B4BCE4CE4D9 /* Pods-SwiftToast_Example-dummy.m */; };
 		244E6E6A62BF63498697C8B957D3F3F6 /* SwiftToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DF29AB9843FFE9F341A5EEFABB44B9 /* SwiftToast.swift */; };
+		2CD233F61F9A13BD003AF58B /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD233F01F9A13A8003AF58B /* PassthroughView.swift */; };
+		2CD233F71F9A13C1003AF58B /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD233F41F9A13B3003AF58B /* PassthroughWindow.swift */; };
+		2CD233F81F9A13C4003AF58B /* PassthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD233F21F9A13AD003AF58B /* PassthroughViewController.swift */; };
 		3681CE7C2AC55322884EFDDEACAD2C19 /* SwiftToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB24F1AFD97995939A0AA58E9A1B6D43 /* SwiftToastView.xib */; };
 		4D39BE16D8C9E449F6EEAE8816A9E910 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		587507C736E2B4FE0983047FA95686E7 /* Pods-SwiftToast_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 011B25FDCC1EB143B3E041E3A63B85D2 /* Pods-SwiftToast_Tests-dummy.m */; };
@@ -49,6 +52,9 @@
 		0F45409805ED3EA577674781201D70D4 /* SwiftToast.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftToast.xcconfig; sourceTree = "<group>"; };
 		18138ED54DE0FAC575636B4BCE4CE4D9 /* Pods-SwiftToast_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftToast_Example-dummy.m"; sourceTree = "<group>"; };
 		20056CA3DFDAF773252FCFA55CFB8A9E /* Pods-SwiftToast_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftToast_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		2CD233F01F9A13A8003AF58B /* PassthroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		2CD233F21F9A13AD003AF58B /* PassthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughViewController.swift; sourceTree = "<group>"; };
+		2CD233F41F9A13B3003AF58B /* PassthroughWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughWindow.swift; sourceTree = "<group>"; };
 		382785BA9EF50CDF0EE5AF0A60913B3F /* SwiftToast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftToast.modulemap; sourceTree = "<group>"; };
 		4454B3E3A55197F84E0BDBCCEB63DD80 /* Pods-SwiftToast_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftToast_Example-resources.sh"; sourceTree = "<group>"; };
 		44AC5C26A4D2B20FA13F621968AA8B3B /* Pods-SwiftToast_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftToast_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +181,9 @@
 		54378F2CFA4BEFA7049F80811BC03E39 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2CD233F01F9A13A8003AF58B /* PassthroughView.swift */,
+				2CD233F21F9A13AD003AF58B /* PassthroughViewController.swift */,
+				2CD233F41F9A13B3003AF58B /* PassthroughWindow.swift */,
 				834E549F1ED3A13B00AAFEF1 /* UIViewController+SwiftToast.swift */,
 				03DF29AB9843FFE9F341A5EEFABB44B9 /* SwiftToast.swift */,
 				C52701F6148F37460F5AF5A0BF7F340E /* SwiftToastView.swift */,
@@ -458,6 +467,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8472CCFDED85859B853972A14F28FF8 /* SwiftToast-dummy.m in Sources */,
+				2CD233F81F9A13C4003AF58B /* PassthroughViewController.swift in Sources */,
+				2CD233F71F9A13C1003AF58B /* PassthroughWindow.swift in Sources */,
+				2CD233F61F9A13BD003AF58B /* PassthroughView.swift in Sources */,
 				244E6E6A62BF63498697C8B957D3F3F6 /* SwiftToast.swift in Sources */,
 				659B05B9FA77BE51D4DC75ECA72EC286 /* SwiftToastView.swift in Sources */,
 				834E54A11ED3A14300AAFEF1 /* UIViewController+SwiftToast.swift in Sources */,

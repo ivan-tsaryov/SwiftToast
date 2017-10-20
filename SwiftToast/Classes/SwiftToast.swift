@@ -131,11 +131,12 @@ open class SwiftToastController {
         guard let keyWindow = UIApplication.shared.keyWindow, let toastView = toastView as? UIView else {
             return
         }
-        
+                        
         let frame = keyWindow.bounds
         let window = PassthroughWindow(frame: frame)
         window.rootViewController = PassthroughViewController()
         window.windowLevel = UIWindowLevelStatusBar + 1
+        window.makeKeyAndVisible()
         window.isHidden = true
         
         window.addSubview(toastView)
