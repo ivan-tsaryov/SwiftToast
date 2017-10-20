@@ -112,6 +112,7 @@ open class SwiftToastController {
     fileprivate var hideTimer: Timer = Timer()
     fileprivate var currentToast: SwiftToastProtocol = SwiftToast()
     fileprivate var delegate: SwiftToastDelegate?
+    fileprivate var window: UIWindow?
     
     var applicationStatusBarStyle: UIStatusBarStyle = UIApplication.shared.statusBarStyle
     
@@ -130,33 +131,40 @@ open class SwiftToastController {
         guard let keyWindow = UIApplication.shared.keyWindow, let toastView = toastView as? UIView else {
             return
         }
-        keyWindow.addSubview(toastView)
+        
+        let frame = keyWindow.bounds
+        let window = PassthroughWindow(frame: frame)
+        window.rootViewController = PassthroughViewController()
+        window.windowLevel = UIWindowLevelStatusBar + 1
+        window.isHidden = true
+        
+        window.addSubview(toastView)
         
         // Set constraints
         toastView.translatesAutoresizingMaskIntoConstraints = false
-        let leadingConstraint = NSLayoutConstraint(item: toastView, attribute: .leading, relatedBy: .equal, toItem: keyWindow, attribute: .leading, multiplier: 1, constant: 0)
-        let trailingConstraint = NSLayoutConstraint(item: toastView, attribute: .trailing, relatedBy: .equal, toItem: keyWindow, attribute: .trailing, multiplier: 1, constant: 0)
+        let leadingConstraint = NSLayoutConstraint(item: toastView, attribute: .leading, relatedBy: .equal, toItem: window, attribute: .leading, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: toastView, attribute: .trailing, relatedBy: .equal, toItem: window, attribute: .trailing, multiplier: 1, constant: 0)
         
         switch currentToast.style {
         case .navigationBar:
             toastViewHeightConstraint = NSLayoutConstraint(item: toastView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64.0)
-            topConstraint = NSLayoutConstraint(item: toastView, attribute: .top, relatedBy: .equal, toItem: keyWindow, attribute: .top, multiplier: 1, constant: -toastView.frame.size.height)
+            topConstraint = NSLayoutConstraint(item: toastView, attribute: .top, relatedBy: .equal, toItem: window, attribute: .top, multiplier: 1, constant: -toastView.frame.size.height)
             
         case .statusBar:
             toastViewHeightConstraint = NSLayoutConstraint(item: toastView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20.0)
-            topConstraint = NSLayoutConstraint(item: toastView, attribute: .top, relatedBy: .equal, toItem: keyWindow, attribute: .top, multiplier: 1, constant: -toastView.frame.size.height)
+            topConstraint = NSLayoutConstraint(item: toastView, attribute: .top, relatedBy: .equal, toItem: window, attribute: .top, multiplier: 1, constant: -toastView.frame.size.height)
             
         case .bottomToTop:
             toastViewHeightConstraint = NSLayoutConstraint(item: toastView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64.0)
-            topConstraint = NSLayoutConstraint(item: toastView, attribute: .bottom, relatedBy: .equal, toItem: keyWindow, attribute: .bottom, multiplier: 1, constant: toastView.frame.size.height)
+            topConstraint = NSLayoutConstraint(item: toastView, attribute: .bottom, relatedBy: .equal, toItem: window, attribute: .bottom, multiplier: 1, constant: toastView.frame.size.height)
             
         case .belowNavigationBar:
             toastViewHeightConstraint = NSLayoutConstraint(item: toastView, attribute: .height, relatedBy: .lessThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0.0)
-            topConstraint = NSLayoutConstraint(item: toastView, attribute: .top, relatedBy: .equal, toItem: keyWindow, attribute: .top, multiplier: 1, constant: 64.0)
+            topConstraint = NSLayoutConstraint(item: toastView, attribute: .top, relatedBy: .equal, toItem: window, attribute: .top, multiplier: 1, constant: 64.0)
         }
         
-        keyWindow.addConstraints([topConstraint!, leadingConstraint, trailingConstraint, toastViewHeightConstraint!])
-        UIApplication.shared.keyWindow?.layoutIfNeeded()
+        window.addConstraints([topConstraint!, leadingConstraint, trailingConstraint, toastViewHeightConstraint!])
+        window.layoutIfNeeded()
         
         // Add gesture
         if currentToast.isUserInteractionEnabled {
@@ -175,6 +183,8 @@ open class SwiftToastController {
     
     func configureStatusBar(for presentingToast: Bool) {
         if presentingToast {
+            window?.isHidden = false
+            
             switch currentToast.style {
             case .navigationBar:
                 if currentToast.aboveStatusBar {
@@ -219,7 +229,7 @@ open class SwiftToastController {
                 self.topConstraint?.constant = -toastView.frame.size.height
             }
         }
-        UIApplication.shared.keyWindow?.layoutIfNeeded()
+        window?.layoutIfNeeded()
     }
     
     // MARK:- Public functions
@@ -234,7 +244,7 @@ open class SwiftToastController {
             self.delegate = toast.target
             self.toastView?.configure(with: toast)
             
-            UIApplication.shared.keyWindow?.layoutIfNeeded()
+            self.window?.layoutIfNeeded()
             
             // present
             UIView.animate(withDuration: animated ? 0.3 : 0.0, delay: 0.0, options: .curveEaseOut, animations: {
